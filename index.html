@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIGETA - Sistem Monitoring Greenhouse AI</title>
+    <title>SIGETA - Sistem IoT Gas Effectiveness Tawas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #1abc9c;
-            --light: #ecf0f1;
-            --dark: #34495e;
+            --primary: #2c5530;
+            --secondary: #4a7c59;
+            --accent: #8fb996;
+            --light: #f8f9fa;
+            --dark: #1e3a28;
             --text: #2c3e50;
-            --text-light: #7f8c8d;
+            --text-light: #5d6d7e;
             --success: #27ae60;
             --warning: #f39c12;
             --danger: #e74c3c;
@@ -173,7 +173,7 @@
         }
 
         .btn:hover {
-            background-color: #16a085;
+            background-color: #7da885;
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
@@ -234,11 +234,11 @@
 
         .tech-image {
             height: 200px;
-            background-color: #ddd;
+            background-color: #e8f5e9;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-light);
+            color: var(--primary);
         }
 
         .tech-content {
@@ -255,45 +255,90 @@
             color: var(--text-light);
         }
 
-        /* Goals Section */
-        .goals-container {
+        /* Research Section */
+        .research-container {
             background: white;
             border-radius: 10px;
             padding: 40px;
             box-shadow: var(--shadow);
         }
 
-        .goals-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        .research-content {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .research-text {
+            flex: 1;
+        }
+
+        .research-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .research-text p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .research-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .research-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* How It Works Section */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
             gap: 30px;
         }
 
-        .goal-item {
+        .step {
             display: flex;
-            gap: 15px;
+            gap: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
-        .goal-icon {
-            background-color: var(--light);
-            width: 60px;
-            height: 60px;
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            background-color: var(--accent);
+            color: white;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent);
             font-size: 1.5rem;
+            font-weight: bold;
             flex-shrink: 0;
         }
 
-        .goal-text h3 {
-            font-size: 1.2rem;
+        .step-content h3 {
+            font-size: 1.3rem;
             margin-bottom: 10px;
             color: var(--primary);
         }
 
-        .goal-text p {
+        .step-content p {
             color: var(--text-light);
         }
 
@@ -313,7 +358,7 @@
         }
 
         .sensor-card {
-            background: var(--light);
+            background: #e8f5e9;
             border-radius: 10px;
             padding: 20px;
             text-align: center;
@@ -370,27 +415,27 @@
             animation: pulse 1s infinite;
         }
 
-        .servo-indicator {
+        .spray-indicator {
             margin-top: 15px;
             padding: 10px;
             border-radius: 10px;
-            background: var(--light);
+            background: #e8f5e9;
             display: inline-flex;
             align-items: center;
             gap: 10px;
         }
 
-        .servo-active {
+        .spray-active {
             color: var(--danger);
             animation: rotate 2s linear infinite;
         }
 
-        .servo-inactive {
+        .spray-inactive {
             color: var(--success);
         }
 
         .api-info {
-            background: var(--light);
+            background: #e8f5e9;
             border-radius: 10px;
             padding: 20px;
             margin-top: 30px;
@@ -501,12 +546,17 @@
                 font-size: 2.2rem;
             }
 
-            .about-content {
+            .about-content, .research-content {
                 flex-direction: column;
             }
 
             .section-title h2 {
                 font-size: 2rem;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
             }
         }
     </style>
@@ -516,13 +566,13 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <i class="fas fa-seedling"></i>
+                <i class="fas fa-toilet"></i>
                 <span>SIGETA</span>
             </div>
             <ul class="nav-links">
                 <li><a href="#about">Tentang</a></li>
-                <li><a href="#technical">Teknis</a></li>
-                <li><a href="#goals">Tujuan</a></li>
+                <li><a href="#research">Latar Belakang</a></li>
+                <li><a href="#how-it-works">Cara Kerja</a></li>
                 <li><a href="#monitoring">Monitoring</a></li>
             </ul>
         </div>
@@ -531,8 +581,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>SIGETA - Sistem Monitoring Greenhouse AI</h1>
-            <p>Platform cerdas berbasis IoT dan Artificial Intelligence untuk memantau dan mengoptimalkan kondisi lingkungan greenhouse secara real-time.</p>
+            <h1>SIGETA - Sistem IoT Gas Effectiveness Tawas</h1>
+            <p>Solusi Pintar Berbasis IoT untuk Mengatasi Bau Tak Sedap di Toilet Umum dengan Tawas dan Ekstrak Serai</p>
             <a href="#monitoring" class="btn">Lihat Monitoring</a>
         </div>
     </section>
@@ -542,99 +592,87 @@
         <div class="container">
             <div class="section-title">
                 <h2>Tentang SIGETA</h2>
-                <p>Sistem Informasi dan Monitoring Greenhouse Terintegrasi AI</p>
+                <p>Sistem IoT Gas Effectiveness Tawas - Inovasi Pengendalian Bau Toilet</p>
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <h3>Mengenal SIGETA</h3>
-                    <p>SIGETA adalah platform cerdas yang menggabungkan teknologi Internet of Things (IoT) dengan kecerdasan buatan untuk memantau dan mengoptimalkan kondisi lingkungan di dalam greenhouse.</p>
-                    <p>Sistem ini menggunakan berbagai sensor untuk mengumpulkan data real-time tentang suhu, kelembapan udara, kelembapan tanah, intensitas cahaya, dan kualitas udara.</p>
-                    <p>Data tersebut kemudian dianalisis oleh algoritma AI untuk memberikan rekomendasi otomatis guna menciptakan lingkungan tumbuh yang optimal bagi tanaman.</p>
-                    <p>Dengan SIGETA, petani dan peneliti dapat memantau kondisi greenhouse dari mana saja melalui antarmuka web yang responsif, serta menerima notifikasi jika terdapat kondisi yang tidak normal yang memerlukan perhatian.</p>
+                    <h3>Apa itu SIGETA?</h3>
+                    <p>SIGETA (Sistem IoT Gas Effectiveness Tawas) adalah solusi inovatif berbasis Internet of Things (IoT) yang dirancang untuk mengatasi masalah bau tak sedap di toilet umum secara otomatis dan ramah lingkungan.</p>
+                    <p>Sistem ini memanfaatkan kombinasi tawas (aluminium sulfat) dan ekstrak serai untuk menetralisir gas amonia (NH₃) yang menjadi sumber utama bau tak sedap di toilet.</p>
+                    <p>Dengan teknologi sensor pintar dan kecerdasan buatan, SIGETA mampu mendeteksi kondisi toilet secara real-time dan mengaktifkan sistem penyemprotan larutan tawas secara otomatis ketika diperlukan.</p>
+                    <p>Inovasi ini tidak hanya efektif dalam mengendalikan bau, tetapi juga hemat energi, ramah lingkungan, dan mudah diintegrasikan dengan sistem manajemen fasilitas modern.</p>
                 </div>
                 <div class="about-image">
                     <div class="tech-image">
-                        <i class="fas fa-image fa-5x"></i>
+                        <i class="fas fa-toilet-paper fa-5x"></i>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Technical Section -->
-    <section id="technical" style="background-color: #f1f2f6;">
+    <!-- Research Section -->
+    <section id="research" style="background-color: #f1f2f6;">
         <div class="container">
             <div class="section-title">
-                <h2>Gambar Teknis SIGETA</h2>
-                <p>Implementasi teknologi dalam sistem SIGETA</p>
+                <h2>Latar Belakang Penelitian</h2>
+                <p>Dasar Ilmiah Pengembangan Sistem SIGETA</p>
             </div>
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <div class="tech-image">
-                        <i class="fas fa-microchip fa-5x"></i>
+            <div class="research-container">
+                <div class="research-content">
+                    <div class="research-text">
+                        <h3>Masalah Kebersihan Toilet Umum</h3>
+                        <p>Kebersihan toilet umum merupakan aspek penting bagi kesehatan dan kenyamanan masyarakat. Namun, perilaku pengguna yang tidak bertanggung jawab, seperti tidak menyiram setelah digunakan, sering menyebabkan akumulasi urine yang memicu pelepasan gas amonia (NH₃) sebagai sumber utama bau tak sedap.</p>
+                        <p>Hal ini sejalan dengan penelitian yang dilakukan oleh Hidayat, dkk. (2021) dari Politeknik Negeri Samarinda, yang mengembangkan sistem monitoring bau tak sedap berbasis Internet of Things (IoT) untuk mendeteksi gas amonia di toilet secara otomatis.</p>
+                        <h3>Solusi Ramah Lingkungan</h3>
+                        <p>Kami mencari solusi yang lebih ramah lingkungan, alami dan efisien untuk menjaga kebersihan udara di kamar mandi. Tawas (Aluminium Sulfat) dikenal memiliki kemampuan untuk mengikat partikel penyebab bau dan zat organik di udara maupun air.</p>
+                        <p>Tawas sering digunakan oleh masyarakat untuk mengurangi bau tak sedap di ketiak. Selain itu, dalam penggunaan tawas ini kami menambahkan ekstrak tanaman alami yaitu serai yang dapat memberikan aroma segar serta memiliki efek antiseptik.</p>
+                        <p>Menurut Tanjung, dkk. (2020), ekstrak daun serai (Cymbopogon citratus) memiliki efektivitas antibakteri terhadap Streptococcus mutans pada berbagai konsentrasi, yang menunjukkan potensi serai sebagai bahan antiseptik alami.</p>
                     </div>
-                    <div class="tech-content">
-                        <h3>Arsitektur Sistem</h3>
-                        <p>Diagram arsitektur lengkap sistem SIGETA yang menunjukkan hubungan antara sensor, microcontroller, server, dan antarmuka pengguna.</p>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-image">
-                        <i class="fas fa-network-wired fa-5x"></i>
-                    </div>
-                    <div class="tech-content">
-                        <h3>Jaringan Sensor</h3>
-                        <p>Layout jaringan sensor dalam greenhouse yang terhubung melalui teknologi IoT untuk pengumpulan data yang komprehensif.</p>
+                    <div class="research-image">
+                        <div class="tech-image" style="height: 400px;">
+                            <i class="fas fa-flask fa-5x"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Goals Section -->
-    <section id="goals">
+    <!-- How It Works Section -->
+    <section id="how-it-works">
         <div class="container">
             <div class="section-title">
-                <h2>Tujuan SIGETA</h2>
-                <p>Misi dan tujuan pengembangan sistem SIGETA</p>
+                <h2>Cara Kerja SIGETA</h2>
+                <p>Teknologi IoT dalam Pengendalian Bau Toilet</p>
             </div>
-            <div class="goals-container">
-                <div class="goals-list">
-                    <div class="goal-item">
-                        <div class="goal-icon">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <div class="goal-text">
-                            <h3>Optimasi Pertumbuhan Tanaman</h3>
-                            <p>Menciptakan lingkungan optimal untuk pertumbuhan tanaman melalui monitoring dan kontrol kondisi lingkungan yang presisi.</p>
-                        </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Deteksi Gas Amonia</h3>
+                        <p>Sensor MQ-135 mendeteksi konsentrasi gas amonia (NH₃) dan senyawa organik volatil (VOC) lainnya di udara toilet. Data dikirim ke mikrokontroler ESP32 secara real-time.</p>
                     </div>
-                    <div class="goal-item">
-                        <div class="goal-icon">
-                            <i class="fas fa-tint"></i>
-                        </div>
-                        <div class="goal-text">
-                            <h3>Efisiensi Sumber Daya</h3>
-                            <p>Mengurangi penggunaan air, pupuk, dan energi melalui sistem kontrol yang cerdas berdasarkan data real-time.</p>
-                        </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Analisis Kecerdasan Buatan</h3>
+                        <p>Algoritma AI menganalisis data sensor untuk menentukan apakah konsentrasi gas telah mencapai tingkat yang memerlukan intervensi. Sistem mempertimbangkan pola penggunaan toilet untuk optimasi.</p>
                     </div>
-                    <div class="goal-item">
-                        <div class="goal-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <div class="goal-text">
-                            <h3>Otomasi Proses</h3>
-                            <p>Mengotomasi proses monitoring dan kontrol lingkungan greenhouse untuk mengurangi ketergantungan pada tenaga manusia.</p>
-                        </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Aktivasi Penyemprotan Otomatis</h3>
+                        <p>Jika sistem mendeteksi bau tak sedap, secara otomatis mengaktifkan pompa untuk menyemprotkan larutan tawas dan ekstrak serai yang telah disiapkan untuk menetralisir bau.</p>
                     </div>
-                    <div class="goal-item">
-                        <div class="goal-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="goal-text">
-                            <h3>Analisis Data Lanjutan</h3>
-                            <p>Menyediakan analisis data yang mendalam untuk pengambilan keputusan yang lebih baik dalam manajemen greenhouse.</p>
-                        </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Monitoring Real-time</h3>
+                        <p>Data kondisi toilet terus dipantau dan ditampilkan melalui antarmuka web, memungkinkan pengelola fasilitas untuk memantau kebersihan toilet dari mana saja.</p>
                     </div>
                 </div>
             </div>
@@ -646,7 +684,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Monitoring Real-time</h2>
-                <p>Pantau kondisi greenhouse secara langsung</p>
+                <p>Pantau Kondisi Toilet Secara Langsung</p>
             </div>
             <div class="monitoring-container">
                 <div class="sensor-grid">
@@ -659,10 +697,10 @@
                     </div>
                     <div class="sensor-card">
                         <div class="sensor-icon">
-                            <i class="fas fa-thermometer-half"></i>
+                            <i class="fas fa-wind"></i>
                         </div>
-                        <div class="sensor-value" id="temp">-</div>
-                        <div class="sensor-label">Suhu (°C)</div>
+                        <div class="sensor-value" id="gas">-</div>
+                        <div class="sensor-label">Konsentrasi Gas (ppm)</div>
                     </div>
                     <div class="sensor-card">
                         <div class="sensor-icon">
@@ -673,17 +711,17 @@
                     </div>
                     <div class="sensor-card">
                         <div class="sensor-icon">
-                            <i class="fas fa-wind"></i>
+                            <i class="fas fa-thermometer-half"></i>
                         </div>
-                        <div class="sensor-value" id="mq">-</div>
-                        <div class="sensor-label">Kualitas Udara (MQ)</div>
+                        <div class="sensor-value" id="temp">-</div>
+                        <div class="sensor-label">Suhu (°C)</div>
                     </div>
                 </div>
                 <div style="text-align: center;">
                     <div class="status-indicator" id="status">Mode Demo - Pilih Status</div>
-                    <div class="servo-indicator" id="servo-status">
-                        <i class="fas fa-cog" id="servo-icon"></i>
-                        <span id="servo-text">Servo: Tidak Aktif</span>
+                    <div class="spray-indicator" id="spray-status">
+                        <i class="fas fa-spray-can" id="spray-icon"></i>
+                        <span id="spray-text">Penyemprotan: Tidak Aktif</span>
                     </div>
                 </div>
                 
@@ -692,10 +730,11 @@
                     <p>Sistem ini terhubung dengan API backend yang menyediakan data sensor real-time. Berikut adalah contoh struktur data yang diterima:</p>
                     <pre>{
   "time": "2023-11-15 14:30:45",
+  "gas_level": 145,
   "temperature": 25.6,
   "humidity": 68.2,
-  "mq": 145,
-  "status": "✅ AMAN"
+  "status": "✅ BERSIH",
+  "spray_active": false
 }</pre>
                     <p>Endpoint API:</p>
                     <ul>
@@ -713,7 +752,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Tentang SIGETA</h3>
-                    <p>SIGETA adalah sistem monitoring greenhouse cerdas berbasis IoT dan AI yang dikembangkan untuk meningkatkan efisiensi dan produktivitas pertanian modern.</p>
+                    <p>SIGETA adalah sistem pintar berbasis IoT untuk mengendalikan bau tak sedap di toilet umum menggunakan tawas dan ekstrak serai secara otomatis dan ramah lingkungan.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -724,8 +763,8 @@
                 <div class="footer-column">
                     <h3>Link Cepat</h3>
                     <a href="#about">Tentang SIGETA</a>
-                    <a href="#technical">Gambar Teknis</a>
-                    <a href="#goals">Tujuan</a>
+                    <a href="#research">Latar Belakang</a>
+                    <a href="#how-it-works">Cara Kerja</a>
                     <a href="#monitoring">Monitoring</a>
                 </div>
                 <div class="footer-column">
@@ -736,7 +775,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 SIGETA - Sistem Informasi dan Monitoring Greenhouse Terintegrasi AI. All rights reserved.</p>
+                <p>&copy; 2023 SIGETA - Sistem IoT Gas Effectiveness Tawas. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -746,27 +785,27 @@
         const demoData = {
             normal: {
                 time: new Date().toLocaleTimeString('id-ID'),
+                gas_level: "145",
                 temperature: "25.6",
                 humidity: "68.2",
-                mq: "145",
-                status: "✅ AMAN",
-                servo: false
+                status: "✅ BERSIH",
+                spray: false
             },
             warning: {
                 time: new Date().toLocaleTimeString('id-ID'),
-                temperature: "31.2",
-                humidity: "82.5",
-                mq: "480",
-                status: "⚠️ SUHU & KELEMBAPAN TINGGI",
-                servo: false
+                gas_level: "380",
+                temperature: "28.2",
+                humidity: "75.5",
+                status: "⚠️ BAU RINGAN",
+                spray: false
             },
             danger: {
                 time: new Date().toLocaleTimeString('id-ID'),
-                temperature: "28.7",
-                humidity: "75.3",
-                mq: "780",
-                status: "⚠️ BAU TERDETEKSI",
-                servo: true
+                gas_level: "650",
+                temperature: "26.7",
+                humidity: "72.3",
+                status: "⚠️ BAU TINGGI - PENYEMPROTAN AKTIF",
+                spray: true
             }
         };
 
@@ -776,9 +815,9 @@
             
             // Update elemen dengan data demo
             document.getElementById('time').textContent = data.time;
+            document.getElementById('gas').textContent = data.gas_level;
             document.getElementById('temp').textContent = data.temperature;
             document.getElementById('hum').textContent = data.humidity;
-            document.getElementById('mq').textContent = data.mq;
             
             const statusElement = document.getElementById('status');
             statusElement.textContent = data.status;
@@ -792,13 +831,13 @@
                 statusElement.className = "status-indicator status-danger";
             }
             
-            // Update status servo
-            if (data.servo) {
-                document.getElementById('servo-icon').className = "fas fa-cog servo-active";
-                document.getElementById('servo-text').textContent = "Servo: Aktif (Bau Terdeteksi)";
+            // Update status penyemprotan
+            if (data.spray) {
+                document.getElementById('spray-icon').className = "fas fa-spray-can spray-active";
+                document.getElementById('spray-text').textContent = "Penyemprotan: Sedang Berlangsung";
             } else {
-                document.getElementById('servo-icon').className = "fas fa-cog servo-inactive";
-                document.getElementById('servo-text').textContent = "Servo: Tidak Aktif";
+                document.getElementById('spray-icon').className = "fas fa-spray-can spray-inactive";
+                document.getElementById('spray-text').textContent = "Penyemprotan: Tidak Aktif";
             }
         }
 
@@ -821,13 +860,18 @@
                     });
                 });
             });
+
+            // Tambahkan demo otomatis untuk menunjukkan fungsi
+            setTimeout(() => setDemoData('warning'), 5000);
+            setTimeout(() => setDemoData('danger'), 10000);
+            setTimeout(() => setDemoData('normal'), 15000);
         };
 
         // Fungsi untuk mendapatkan data demo saat ini (untuk update waktu)
         function getCurrentDemoData() {
             const status = document.getElementById('status').textContent;
-            if (status.includes("AMAN")) return 'normal';
-            if (status.includes("BAU")) return 'danger';
+            if (status.includes("BERSIH")) return 'normal';
+            if (status.includes("PENYEMPROTAN")) return 'danger';
             return 'warning';
         }
     </script>
