@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGETA - Sistem IoT Gas Effectiveness Tawas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c5530;
+            --secondary: #4a7c59;
+            --accent: #8fb996;
+            --light: #f8f9fa;
+            --dark: #1e3a28;
+            --text: #2c3e50;
+            --text-light: #5d6d7e;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #7da885;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .about-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Technical Section */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .tech-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-image {
+            height: 200px;
+            background-color: #e8f5e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .tech-content {
+            padding: 20px;
+        }
+
+        .tech-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .tech-content p {
+            color: var(--text-light);
+        }
+
+        /* Research Section */
+        .research-container {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .research-content {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .research-text {
+            flex: 1;
+        }
+
+        .research-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .research-text p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .research-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .research-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* How It Works Section */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            background-color: var(--accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .step-content p {
+            color: var(--text-light);
+        }
+
+        /* Monitoring Section */
+        .monitoring-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .sensor-card {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .sensor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .sensor-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .sensor-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 10px 0;
+            color: var(--primary);
+        }
+
+        .sensor-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: var(--transition);
+        }
+
+        .status-normal {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success);
+        }
+
+        .status-warning {
+            background: rgba(243, 156, 18, 0.1);
+            color: var(--warning);
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-danger {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--danger);
+            animation: pulse 1s infinite;
+        }
+
+        .spray-indicator {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #e8f5e9;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .spray-active {
+            color: var(--danger);
+            animation: rotate 2s linear infinite;
+        }
+
+        .spray-inactive {
+            color: var(--success);
+        }
+
+        .api-info {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .api-info h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .api-info pre {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-column p, .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                height: auto;
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .about-content, .research-content {
+                flex-direction: column;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-toilet"></i>
+                <span>SIGETA</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#research">Latar Belakang</a></li>
+                <li><a href="#how-it-works">Cara Kerja</a></li>
+                <li><a href="#monitoring">Monitoring</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>SIGETA - Sistem IoT Gas Effectiveness Tawas</h1>
+            <p>Solusi Pintar Berbasis IoT untuk Mengatasi Bau Tak Sedap di Toilet Umum dengan Tawas dan Ekstrak Serai</p>
+            <a href="#monitoring" class="btn">Lihat Monitoring</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tentang SIGETA</h2>
+                <p>Sistem IoT Gas Effectiveness Tawas - Inovasi Pengendalian Bau Toilet</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Apa itu SIGETA?</h3>
+                    <p>SIGETA (Sistem IoT Gas Effectiveness Tawas) adalah solusi inovatif berbasis Internet of Things (IoT) yang dirancang untuk mengatasi masalah bau tak sedap di toilet umum secara otomatis dan ramah lingkungan.</p>
+                    <p>Sistem ini memanfaatkan kombinasi tawas (aluminium sulfat) dan ekstrak serai untuk menetralisir gas amonia (NH₃) yang menjadi sumber utama bau tak sedap di toilet.</p>
+                    <p>Dengan teknologi sensor pintar dan kecerdasan buatan, SIGETA mampu mendeteksi kondisi toilet secara real-time dan mengaktifkan sistem penyemprotan larutan tawas secara otomatis ketika diperlukan.</p>
+                    <p>Inovasi ini tidak hanya efektif dalam mengendalikan bau, tetapi juga hemat energi, ramah lingkungan, dan mudah diintegrasikan dengan sistem manajemen fasilitas modern.</p>
+                </div>
+                <div class="about-image">
+                    <div class="tech-image">
+                        <i class="fas fa-toilet-paper fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" style="background-color: #f1f2f6;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latar Belakang Penelitian</h2>
+                <p>Dasar Ilmiah Pengembangan Sistem SIGETA</p>
+            </div>
+            <div class="research-container">
+                <div class="research-content">
+                    <div class="research-text">
+                        <h3>Masalah Kebersihan Toilet Umum</h3>
+                        <p>Kebersihan toilet umum merupakan aspek penting bagi kesehatan dan kenyamanan masyarakat. Namun, perilaku pengguna yang tidak bertanggung jawab, seperti tidak menyiram setelah digunakan, sering menyebabkan akumulasi urine yang memicu pelepasan gas amonia (NH₃) sebagai sumber utama bau tak sedap.</p>
+                        <p>Hal ini sejalan dengan penelitian yang dilakukan oleh Hidayat, dkk. (2021) dari Politeknik Negeri Samarinda, yang mengembangkan sistem monitoring bau tak sedap berbasis Internet of Things (IoT) untuk mendeteksi gas amonia di toilet secara otomatis.</p>
+                        <h3>Solusi Ramah Lingkungan</h3>
+                        <p>Kami mencari solusi yang lebih ramah lingkungan, alami dan efisien untuk menjaga kebersihan udara di kamar mandi. Tawas (Aluminium Sulfat) dikenal memiliki kemampuan untuk mengikat partikel penyebab bau dan zat organik di udara maupun air.</p>
+                        <p>Tawas sering digunakan oleh masyarakat untuk mengurangi bau tak sedap di ketiak. Selain itu, dalam penggunaan tawas ini kami menambahkan ekstrak tanaman alami yaitu serai yang dapat memberikan aroma segar serta memiliki efek antiseptik.</p>
+                        <p>Menurut Tanjung, dkk. (2020), ekstrak daun serai (Cymbopogon citratus) memiliki efektivitas antibakteri terhadap Streptococcus mutans pada berbagai konsentrasi, yang menunjukkan potensi serai sebagai bahan antiseptik alami.</p>
+                    </div>
+                    <div class="research-image">
+                        <div class="tech-image" style="height: 400px;">
+                            <i class="fas fa-flask fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>Cara Kerja SIGETA</h2>
+                <p>Teknologi IoT dalam Pengendalian Bau Toilet</p>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Deteksi Gas Amonia</h3>
+                        <p>Sensor MQ-135 mendeteksi konsentrasi gas amonia (NH₃) dan senyawa organik volatil (VOC) lainnya di udara toilet. Data dikirim ke mikrokontroler ESP32 secara real-time.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Analisis Kecerdasan Buatan</h3>
+                        <p>Algoritma AI menganalisis data sensor untuk menentukan apakah konsentrasi gas telah mencapai tingkat yang memerlukan intervensi. Sistem mempertimbangkan pola penggunaan toilet untuk optimasi.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Aktivasi Penyemprotan Otomatis</h3>
+                        <p>Jika sistem mendeteksi bau tak sedap, secara otomatis mengaktifkan pompa untuk menyemprotkan larutan tawas dan ekstrak serai yang telah disiapkan untuk menetralisir bau.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Monitoring Real-time</h3>
+                        <p>Data kondisi toilet terus dipantau dan ditampilkan melalui antarmuka web, memungkinkan pengelola fasilitas untuk memantau kebersihan toilet dari mana saja.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monitoring Section -->
+    <section id="monitoring" style="background-color: #f1f2f6;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Monitoring Real-time</h2>
+                <p>Pantau Kondisi Toilet Secara Langsung</p>
+            </div>
+            <div class="monitoring-container">
+                <div class="sensor-grid">
+                    <div class="sensor-card">
+                        <div class="sensor-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="sensor-value" id="time">-</div>
+                        <div class="sensor-label">Waktu Terakhir Update</div>
+                    </div>
+                    <div class="sensor-card">
+                        <div class="sensor-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <div class="sensor-value" id="gas">-</div>
+                        <div class="sensor-label">Konsentrasi Gas (ppm)</div>
+                    </div>
+                    <div class="sensor-card">
+                        <div class="sensor-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="sensor-value" id="hum">-</div>
+                        <div class="sensor-label">Kelembapan (%)</div>
+                    </div>
+                    <div class="sensor-card">
+                        <div class="sensor-icon">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <div class="sensor-value" id="temp">-</div>
+                        <div class="sensor-label">Suhu (°C)</div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="status-indicator" id="status">Mode Demo - Pilih Status</div>
+                    <div class="spray-indicator" id="spray-status">
+                        <i class="fas fa-spray-can" id="spray-icon"></i>
+                        <span id="spray-text">Penyemprotan: Tidak Aktif</span>
+                    </div>
+                </div>
+                
+                <div class="api-info">
+                    <h3><i class="fas fa-code"></i> Informasi API</h3>
+                    <p>Sistem ini terhubung dengan API backend yang menyediakan data sensor real-time. Berikut adalah contoh struktur data yang diterima:</p>
+                    <pre>{
+  "time": "2023-11-15 14:30:45",
+  "gas_level": 145,
+  "temperature": 25.6,
+  "humidity": 68.2,
+  "status": "✅ BERSIH",
+  "spray_active": false
+}</pre>
+                    <p>Endpoint API:</p>
+                    <ul>
+                        <li><strong>POST /data</strong> - Menerima data sensor dari ESP32</li>
+                        <li><strong>GET /latest</strong> - Mengambil data terbaru untuk ditampilkan di web</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang SIGETA</h3>
+                    <p>SIGETA adalah sistem pintar berbasis IoT untuk mengendalikan bau tak sedap di toilet umum menggunakan tawas dan ekstrak serai secara otomatis dan ramah lingkungan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <a href="#about">Tentang SIGETA</a>
+                    <a href="#research">Latar Belakang</a>
+                    <a href="#how-it-works">Cara Kerja</a>
+                    <a href="#monitoring">Monitoring</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Teknologi No. 123, Bandung</p>
+                    <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
+                    <p><i class="fas fa-envelope"></i> info@sigeta.id</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 SIGETA - Sistem IoT Gas Effectiveness Tawas. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data demo untuk berbagai kondisi
+        const demoData = {
+            normal: {
+                time: new Date().toLocaleTimeString('id-ID'),
+                gas_level: "145",
+                temperature: "25.6",
+                humidity: "68.2",
+                status: "✅ BERSIH",
+                spray: false
+            },
+            warning: {
+                time: new Date().toLocaleTimeString('id-ID'),
+                gas_level: "380",
+                temperature: "28.2",
+                humidity: "75.5",
+                status: "⚠️ BAU RINGAN",
+                spray: false
+            },
+            danger: {
+                time: new Date().toLocaleTimeString('id-ID'),
+                gas_level: "650",
+                temperature: "26.7",
+                humidity: "72.3",
+                status: "⚠️ BAU TINGGI - PENYEMPROTAN AKTIF",
+                spray: true
+            }
+        };
+
+        // Fungsi untuk mengatur data demo
+        function setDemoData(condition) {
+            const data = demoData[condition];
+            
+            // Update elemen dengan data demo
+            document.getElementById('time').textContent = data.time;
+            document.getElementById('gas').textContent = data.gas_level;
+            document.getElementById('temp').textContent = data.temperature;
+            document.getElementById('hum').textContent = data.humidity;
+            
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = data.status;
+            
+            // Update warna status berdasarkan kondisi
+            if (condition === 'normal') {
+                statusElement.className = "status-indicator status-normal";
+            } else if (condition === 'warning') {
+                statusElement.className = "status-indicator status-warning";
+            } else if (condition === 'danger') {
+                statusElement.className = "status-indicator status-danger";
+            }
+            
+            // Update status penyemprotan
+            if (data.spray) {
+                document.getElementById('spray-icon').className = "fas fa-spray-can spray-active";
+                document.getElementById('spray-text').textContent = "Penyemprotan: Sedang Berlangsung";
+            } else {
+                document.getElementById('spray-icon').className = "fas fa-spray-can spray-inactive";
+                document.getElementById('spray-text').textContent = "Penyemprotan: Tidak Aktif";
+            }
+        }
+
+        // Inisialisasi dengan data normal saat halaman dimuat
+        window.onload = function() {
+            setDemoData('normal');
+            
+            // Update waktu setiap detik
+            setInterval(() => {
+                const currentData = getCurrentDemoData();
+                document.getElementById('time').textContent = new Date().toLocaleTimeString('id-ID');
+            }, 1000);
+            
+            // Tambahkan event listener untuk smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Tambahkan demo otomatis untuk menunjukkan fungsi
+            setTimeout(() => setDemoData('warning'), 5000);
+            setTimeout(() => setDemoData('danger'), 10000);
+            setTimeout(() => setDemoData('normal'), 15000);
+        };
+
+        // Fungsi untuk mendapatkan data demo saat ini (untuk update waktu)
+        function getCurrentDemoData() {
+            const status = document.getElementById('status').textContent;
+            if (status.includes("BERSIH")) return 'normal';
+            if (status.includes("PENYEMPROTAN")) return 'danger';
+            return 'warning';
+        }
+    </script>
+</body>
+</html>
